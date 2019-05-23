@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.core.env.Environment;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = WebEnvironment.DEFINED_PORT)
-@ActiveProfiles("prod")
+//@ActiveProfiles("prod")
 public class PortTestDefault {
 
 	@Autowired
@@ -21,6 +20,7 @@ public class PortTestDefault {
 	
 	@Test
 	public void contextLoads() {
+	    System.out.println("############");
 		assertEquals("8088", env.getProperty("server.port"));
 	}
 
