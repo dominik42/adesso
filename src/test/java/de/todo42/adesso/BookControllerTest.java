@@ -16,6 +16,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import de.todo42.adesso.book.Book;
 import de.todo42.adesso.book.BookRestController;
 import de.todo42.adesso.book.BookService;
+import de.todo42.adesso.book.BookValidator;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookControllerTest {
@@ -33,7 +34,7 @@ public class BookControllerTest {
     
     @Test
     public void testGetAllBooks() throws Exception {
-        bookController = new BookRestController(bookService);
+        bookController = new BookRestController(bookService, new BookValidator());
         Collection<Book> books = bookController.getAllBooks();
         assertEquals(1,  books.size());
     }

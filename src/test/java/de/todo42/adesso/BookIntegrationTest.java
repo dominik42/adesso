@@ -81,5 +81,21 @@ public class BookIntegrationTest {
                 .andExpect(jsonPath("$.[1].title").value("Clean Code"));
     }
     
+    @Test
+    public void testCreateBook() throws Exception {
+        Book book = ValueStore.book();
+        book.setTitle("222");
+        
+        String json = mapper.writeValueAsString(book);
+        
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.post("/book")
+                .accept(MediaType.APPLICATION_JSON_UTF8)
+                .contentType(MediaType.APPLICATION_JSON_UTF8)
+                .content(json))
+            .andExpect(status().isOk())
+            .andReturn();
+        
+    }
+    
     
 }
