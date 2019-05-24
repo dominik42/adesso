@@ -3,8 +3,8 @@ package de.todo42.adesso;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import org.junit.Before;
@@ -35,7 +35,9 @@ public class BookControllerTest {
     @Test
     public void testGetAllBooks() throws Exception {
         bookController = new BookRestController(bookService, new BookValidator());
-        Collection<Book> books = bookController.getAllBooks();
+
+        List<Book> books = new ArrayList<>();
+        bookController.getAllBooks().forEach(books::add);
         assertEquals(1,  books.size());
     }
 }

@@ -45,6 +45,7 @@
     </root>
 
     <logger name="de.todo42" level="debug" />
+<!--     <logger name="org.hibernate.type" level="trace" /> -->
 
     
 <!--     <logger name="org.springframework.boot" level="debug" /> -->

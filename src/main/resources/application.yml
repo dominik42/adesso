@@ -8,7 +8,7 @@ spring:
 
   datasource:
     driverClassName: org.h2.Driver
-    url: jdbc:h2:mem:adesso
+    url: jdbc:h2:mem:adesso;DB_CLOSE_ON_EXIT=FALSE
     username: sa
     password: 
     hikari:
@@ -23,6 +23,11 @@ spring:
         # damit aus camelCased Attributen für Postgres passende column-Namen werden
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
 
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      
 adesso:
   singleProp: val1
   port: 80
@@ -30,9 +35,7 @@ adesso:
     label: Test
     prop2: Value2
     
-    
-    
-    #
+
 ---
 spring:
   profiles: prod

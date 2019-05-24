@@ -1,6 +1,6 @@
 package de.todo42.adesso.book;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.NonNull;
@@ -43,30 +42,14 @@ public class BookRestController {
     }
     
     @GetMapping
-    public Collection<Book> getAllBooks() {
+    public List<Book> getAllBooks() {
         return bookService.loadAllBooks();
     }
     
     @GetMapping(path = "/{isbn}")
     public Book getSingleBook(@PathVariable(name = "isbn", required = true)
             String isbn) {
-        Book book = Book.builder()
-                .title("Spring Boot 2")
-                .author("Michael Simons")
-                .isbn(isbn)
-                .build();
-        return book;
-    }
-
-    @GetMapping(params = "isbn")
-    public Book getSingleBook2(@RequestParam(name = "isbn", required = true)
-    String isbn) {
-        Book book = Book.builder()
-                .title("Spring Boot 2")
-                .author("Michael Simons")
-                .isbn(isbn)
-                .build();
-        return book;
+        return bookService.loadByIsbn(isbn);
     }
 
     @PostMapping

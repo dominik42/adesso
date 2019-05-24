@@ -1,6 +1,5 @@
 package de.todo42.adesso.book;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,7 @@ public class BookController {
     
     @GetMapping(path = "/books")
     public String books(Model model) {
-        List<Book> books = new ArrayList<Book>();
-        books.addAll(bookService.loadAllBooks());
+        List<Book> books = (List<Book>) bookService.loadAllBooks();
         model.addAttribute("books", books);
         return "books";
     }

@@ -2,10 +2,11 @@ package de.todo42.adesso.book;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,6 +22,7 @@ import lombok.NoArgsConstructor;
 public class Book {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
     @NotNull
@@ -29,7 +31,7 @@ public class Book {
     
     private String author;
     
-    @Size(min = 13, max = 13)
+    //    @Size(min = 13, max = 13)
     private String isbn;
     
 }

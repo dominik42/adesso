@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.todo42.adesso.book.Book;
 import de.todo42.adesso.book.BookRestController;
+import de.todo42.adesso.book.BookService;
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
@@ -34,6 +36,9 @@ public class BookIntegrationTest {
 
     @Autowired
     private BookRestController bookController;
+    
+    @Autowired
+    private BookService bookService;
     
     @Autowired
     private WebApplicationContext wac;
@@ -54,7 +59,7 @@ public class BookIntegrationTest {
     
     @Test
     public void testGetAllBooks() throws Exception {
-        Collection<Book> books = bookController.getAllBooks();
+        List<Book> books = bookController.getAllBooks();
         assertEquals(3,  books.size());
     }
 
@@ -70,6 +75,19 @@ public class BookIntegrationTest {
         log.debug("JSON response {}", json);
         Collection<Book> books = (Collection<Book>) mapper.readValue(json, Collection.class);
         assertEquals(3,  books.size());
+    }
+
+    @Test
+    public void testGetSingleBooks() throws Exception {
+        MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get("/book/978-3864905254")
+                .accept(MediaType.APPLICATION_JSON_UTF8))
+                .andExpect(status().isOk())
+                .andReturn();
+        
+        String json = mvcResult.getResponse().getContentAsString();
+        assertNotNull(json);
+        Book book = (Book) mapper.readValue(json, Book.class);
+        assertEquals("Spring Boot 2",  book.getTitle());
     }
 
     @Test
@@ -94,7 +112,11 @@ public class BookIntegrationTest {
                 .content(json))
             .andExpect(status().isOk())
             .andReturn();
-        
+    }
+    
+    @Test
+    public void testSaveBook() throws Exception {
+        bookService.addBook(ValueStore.book());
     }
     
     
