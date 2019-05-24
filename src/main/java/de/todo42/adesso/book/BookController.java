@@ -1,51 +1,37 @@
 package de.todo42.adesso.book;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-@RequestMapping(BookController.REQUEST_URL)
-//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BookController {
 
-    public static final String REQUEST_URL = "/book";
     
-    @Autowired
+    @NonNull
     private BookService bookService;
     
     
-    @GetMapping
-    public Collection<Book> getAllBooks() {
-        return bookService.loadAllBooks();
+    @GetMapping(path = "/")
+    public String index(Model model) {
+        model.addAttribute("message", "Hallo adesso");
+        return "index";
     }
     
-    @GetMapping(path = "/{isbn}")
-    public Book getSingleBook(@PathVariable(name = "isbn", required = true)
-            String isbn) {
-        Book book = Book.builder()
-                .title("Spring Boot 2")
-                .author("Michael Simons")
-                .isbn(isbn)
-                .build();
-        return book;
+    @GetMapping(path = "/books")
+    public String books(Model model) {
+        List<Book> books = new ArrayList<Book>();
+        books.addAll(bookService.loadAllBooks());
+        model.addAttribute("books", books);
+        return "books";
     }
-
-    @GetMapping(params = "isbn")
-    public Book getSingleBook2(@RequestParam(name = "isbn", required = true)
-    String isbn) {
-        Book book = Book.builder()
-                .title("Spring Boot 2")
-                .author("Michael Simons")
-                .isbn(isbn)
-                .build();
-        return book;
-    }
-    
     
 }

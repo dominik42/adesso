@@ -10,12 +10,11 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import de.todo42.adesso.book.Book;
-import de.todo42.adesso.book.BookController;
+import de.todo42.adesso.book.BookRestController;
 import de.todo42.adesso.book.BookService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -24,8 +23,7 @@ public class BookControllerTest {
     @Mock
     private BookService bookService;
     
-    @InjectMocks
-    private BookController bookController = new BookController();
+    private BookRestController bookController;
     
     @Before
     public void setup() {
@@ -35,6 +33,7 @@ public class BookControllerTest {
     
     @Test
     public void testGetAllBooks() throws Exception {
+        bookController = new BookRestController(bookService);
         Collection<Book> books = bookController.getAllBooks();
         assertEquals(1,  books.size());
     }

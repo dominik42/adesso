@@ -24,7 +24,7 @@ import org.springframework.web.context.WebApplicationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.todo42.adesso.book.Book;
-import de.todo42.adesso.book.BookController;
+import de.todo42.adesso.book.BookRestController;
 import lombok.extern.slf4j.Slf4j;
 
 @RunWith(SpringRunner.class)
@@ -33,7 +33,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BookIntegrationTest {
 
     @Autowired
-    private BookController bookController;
+    private BookRestController bookController;
     
     @Autowired
     private WebApplicationContext wac;
