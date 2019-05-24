@@ -9,17 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-
 @RestController
 @RequestMapping(BookController.REQUEST_URL)
-@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+//@RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BookController {
 
     public static final String REQUEST_URL = "/book";
     
-    @NonNull
+    @Autowired
     private BookService bookService;
     
     
