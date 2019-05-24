@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -32,6 +33,18 @@ public class BookController {
         books.addAll(bookService.loadAllBooks());
         model.addAttribute("books", books);
         return "books";
+    }
+
+    @GetMapping(path = "/newBook")
+    public String newBook(Model model) {
+        model.addAttribute("book", new Book());
+        return "newBook";
+    }
+
+    @PostMapping(path = "/createBook")
+    public String createBook(Book book, Model model) {
+        bookService.addBook(book);
+        return "redirect:books";
     }
     
 }

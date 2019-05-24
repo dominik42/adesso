@@ -39,5 +39,9 @@ public class BookService {
         return bookMap.values();
     }
 
+    public void addBook(Book book) {
+        bookMap.put(book.getIsbn(), book);
+    }
+
     
 }
