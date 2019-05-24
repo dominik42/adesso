@@ -6,6 +6,23 @@ spring:
     serialization:
       INDENT_OUTPUT: true
 
+  datasource:
+    driverClassName: org.h2.Driver
+    url: jdbc:h2:mem:adesso
+    username: sa
+    password: 
+    hikari:
+      pool-name: adesso
+      maximum-pool-size: 10
+    
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+      naming:
+        # damit aus camelCased Attributen für Postgres passende column-Namen werden
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+
 adesso:
   singleProp: val1
   port: 80
@@ -13,6 +30,9 @@ adesso:
     label: Test
     prop2: Value2
     
+    
+    
+    #
 ---
 spring:
   profiles: prod
