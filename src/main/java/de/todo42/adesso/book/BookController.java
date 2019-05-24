@@ -16,11 +16,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class BookController {
 
-    
     @NonNull
     private BookService bookService;
     
-    
+
     @GetMapping(path = "/")
     public String index(Model model) {
         model.addAttribute("message", "Hallo adesso");

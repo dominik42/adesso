@@ -1,0 +1,27 @@
+{"properties": [
+    {
+      "name": "adesso.singleProp",
+      "type": "java.lang.String",
+      "description": "unser prop"
+    },
+    {
+      "name": "adesso.port",
+      "type": "java.lang.Integer",
+      "description": "A second description"
+    },
+    {
+      "name": "adesso.workshop",
+      "type": "de.todo42.adesso.config.ApplicationConfig$Workshop",
+      "description": "A second description"
+    },
+    {
+      "name": "adesso.workshop.label",
+      "type": "java.lang.String",
+      "description": "A second description"
+    },
+    {
+      "name": "adesso.workshop.prop2",
+      "type": "java.lang.String",
+      "description": "A second description"
+    }
+]}

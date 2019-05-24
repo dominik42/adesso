@@ -6,9 +6,19 @@ spring:
     serialization:
       INDENT_OUTPUT: true
 
+adesso:
+  singleProp: val1
+  port: 80
+  workshop:
+    label: Test
+    prop2: Value2
+    
 ---
 spring:
   profiles: prod
 
 server:
   port: 8090
+
+adesso:
+  port: 8080
