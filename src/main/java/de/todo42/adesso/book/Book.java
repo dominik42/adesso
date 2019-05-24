@@ -29,9 +29,14 @@ public class Book {
     @Column(length = 1024)
     private String title;
     
+    
     private String author;
     
     //    @Size(min = 13, max = 13)
     private String isbn;
+    
+//    @ManyToOne
+//    @JsonBackReference
+//    private Publisher publisher;
     
 }

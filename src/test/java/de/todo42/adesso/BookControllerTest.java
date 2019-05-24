@@ -13,10 +13,13 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import de.todo42.adesso.book.Book;
 import de.todo42.adesso.book.BookRestController;
 import de.todo42.adesso.book.BookService;
 import de.todo42.adesso.book.BookValidator;
+import de.todo42.adesso.book.Publisher;
 
 @RunWith(MockitoJUnitRunner.class)
 public class BookControllerTest {
@@ -39,5 +42,22 @@ public class BookControllerTest {
         List<Book> books = new ArrayList<>();
         bookController.getAllBooks().forEach(books::add);
         assertEquals(1,  books.size());
+    }
+    
+    @Test
+    public void testPublisher() throws Exception {
+        Publisher p = new Publisher();
+        p.setName("P1");
+        
+        Book b1 = ValueStore.book();
+        Book b2 = ValueStore.book();
+        
+        p.addBook(b1);
+        p.addBook(b2);
+        
+        ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(p));
+        
+        
     }
 }
