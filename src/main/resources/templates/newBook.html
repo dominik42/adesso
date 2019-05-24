@@ -3,22 +3,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
       <meta charset="UTF-8" />
-      <link rel="stylesheet" href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css">
+      <link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css">
       <title>New Book</title>
    </head>
    <body>
     
       <h1>Create Book</h1>
       
-      <form action="#" th:action="@{/createBook}" th:object="${book}" method="post">
-        <input type="text" th:field="*{title}" />
-        <input type="text" th:field="*{author}" />
-        <input type="text" th:field="*{isbn}" />
-        <button type="submit" name="newBook">Save</button>
-      </form>
+<!--       <form action="#" th:action="@{/createBook}" th:object="${book}" method="post"> -->
+<!--         <input type="text" th:field="*{title}" /> -->
+<!--         <input type="text" th:field="*{author}" /> -->
+<!--         <input type="text" th:field="*{isbn}" /> -->
+<!--         <button type="submit" name="newBook">Save</button> -->
+<!--       </form> -->
      <a th:href="@{/}">Home</a>
      
-<!--         
+         
      <div class="container">
      <div class="row">
 
@@ -41,7 +41,7 @@
 
 </div>
      </div>
- -->
+ 
    </body>
     
 </html>
