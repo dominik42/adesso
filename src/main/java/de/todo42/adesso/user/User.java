@@ -1,6 +1,7 @@
 package de.todo42.adesso.user;
 
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,8 @@ public class User implements UserDetails {
     private String username;
     
     private String password;
+    
+    private Date lastLogin;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
