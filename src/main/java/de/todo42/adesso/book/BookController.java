@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
+@Slf4j
 public class BookController {
 
     @NonNull
@@ -27,6 +29,7 @@ public class BookController {
     
     @GetMapping(path = "/books")
     public String books(Model model) {
+        log.debug("get all books");
         List<Book> books = (List<Book>) bookService.loadAllBooks();
         model.addAttribute("books", books);
         return "books";

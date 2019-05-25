@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.MDC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,6 +33,8 @@ public class AuthSucessHandler extends SimpleUrlAuthenticationSuccessHandler {
         User user = (User) userDetails;
         user.setLastLogin(new Date());
         userRepository.save(user);
+        
+        MDC.put("user", user.getUsername());
         
         setDefaultTargetUrl("http://localhost:8088/");
         super.onAuthenticationSuccess(request, response, authentication);
