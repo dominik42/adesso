@@ -18,10 +18,14 @@ spring:
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: validate
       naming:
         # damit aus camelCased Attributen für Postgres passende column-Namen werden
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl 
+
+  liquibase:
+    change-log: classpath:/liquibase/changelog.xml
+    drop-first: true
 
   h2:
     console:
@@ -39,6 +43,9 @@ adesso:
 ---
 spring:
   profiles: prod
+  
+  liquibase:
+    drop-first: false
 
 server:
   port: 8090

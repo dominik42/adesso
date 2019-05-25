@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,8 +39,9 @@ public class Book {
     //    @Size(min = 13, max = 13)
     private String isbn;
     
-//    @ManyToOne
-//    @JsonBackReference
-//    private Publisher publisher;
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "publisher")
+    private Publisher publisher;
     
 }

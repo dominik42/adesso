@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+    http://www.liquibase.org/xml/ns/dbchangelog-ext
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd"
+    logicalFilePath="liquibase/changelogs" objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+
+    <!-- logicalFilePath="liquibase/changelogs" ist notwendig, da liquibase unter CLI und maven sonst unterschiedliche filenames 
+        als Bestandteil des changeset identifier hätten und daher das changeset IMMER ausführen würden CLI: liquibase/changelog.xml 
+        MVN: target/classes/liquibase/changelog.xml -->
+
+    <changeSet id="createTablePublisher" author="dom">
+        <createTable tableName="publisher">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(1024)" />
+        </createTable>
+        <rollback>
+            <dropTable tableName="publisher"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="createTableBook" author="dom">
+        <createTable tableName="books">
+            <column name="id" type="int">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="title" type="varchar(1024)" />
+            <column name="author" type="varchar(1024)" />
+            <column name="isbn" type="varchar(13)" />
+            <column name="publisher" type="int" />
+        </createTable>
+        <addForeignKeyConstraint constraintName="fk_books_publisher" 
+            baseTableName="books" baseColumnNames="publisher" 
+            referencedTableName="publisher" referencedColumnNames="id" 
+            onDelete="SET NULL"/>
+            
+        <rollback>
+            <dropTable tableName="books"/>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>
